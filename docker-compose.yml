@@ -1,0 +1,30 @@
+services:
+  ioc:
+    image: ghcr.io/cnpem/hiden-rga-epics-ioc:${TAG}
+    build:
+      context: ./
+      dockerfile: docker/Dockerfile
+      target: static-link
+      labels:
+        org.opencontainers.image.source: https://github.com/cnpem/hiden-rga-epics-module
+      args:
+        IS_MODULE: 1
+        MODULE_NAME: HIDEN
+        REPONAME: HidenRGA
+        RUNDIR: /opt/HidenRGA/iocBoot/iocHidenRGA
+        IOC_DBDS:
+          asyn.dbd
+          drvAsynIPPort.dbd
+          calc.dbd
+          stream.dbd
+          HidenRGA.dbd
+        IOC_LIBS:
+          HidenRGA
+          stream
+          calc
+          asyn
+          seq pv
+        IOC_DBS:
+          $(wildcard $(HIDEN)/db/*)
+        IOC_CMDS:
+          /opt/epics/modules/HidenRGA/iocs/HidenRGAIOC/iocBoot/iocHidenRGA/st.cmd
