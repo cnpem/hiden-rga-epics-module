@@ -28,3 +28,4 @@ services:
           $(wildcard $(HIDEN)/db/*)
         IOC_CMDS:
           /opt/epics/modules/HidenRGA/iocs/HidenRGAIOC/iocBoot/iocHidenRGA/st.cmd
+          /opt/epics/modules/HidenRGA/iocs/HidenRGAIOC/iocBoot/iocHidenRGA/set-mid.cmd
