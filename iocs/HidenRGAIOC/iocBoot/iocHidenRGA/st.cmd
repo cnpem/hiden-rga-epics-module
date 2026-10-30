@@ -9,10 +9,8 @@
 
 epicsEnvSet("STREAM_PROTOCOL_PATH","${TOP}/db")
 
-cd "${TOP}"
-
 ## Register all support components
-dbLoadDatabase "dbd/HidenRGA.dbd"
+dbLoadDatabase "$(TOP)/dbd/HidenRGA.dbd"
 HidenRGA_registerRecordDeviceDriver pdbbase
 
 # Connect to MSIU
@@ -26,7 +24,6 @@ dbLoadRecords("${TOP}/db/hiden_rga_mid.template", "Sys=${P},Dev=${R},PORT=LO")
 dbLoadRecords("${TOP}/db/hiden_rga_degas.template", "Sys=${P},Dev=${R},PORT=LO")
 dbLoadRecords("${TOP}/db/hiden_rga_ld.template", "Sys=${P},Dev=${R},MinMass=1,MaxMass=200,PORT=LO")
 
-cd "${TOP}/iocBoot/${IOC}"
 iocInit
 
 seq sncDegas, "Sys=${P},Dev=${R}"
