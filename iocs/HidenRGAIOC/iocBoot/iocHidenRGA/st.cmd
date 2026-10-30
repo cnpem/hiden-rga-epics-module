@@ -3,9 +3,9 @@
 < envPaths
 
 # Prefix configuration:
-#   HOST - Hiden MSIU IP address
-#   P    - EPICS PV system prefix
-#   R    - EPICS PV device prefix
+#   IP_ADDR - Hiden MSIU IP address
+#   P       - EPICS PV system prefix
+#   R       - EPICS PV device prefix
 
 epicsEnvSet("STREAM_PROTOCOL_PATH","${TOP}/db")
 
@@ -16,7 +16,7 @@ dbLoadDatabase "dbd/HidenRGA.dbd"
 HidenRGA_registerRecordDeviceDriver pdbbase
 
 # Connect to MSIU
-drvAsynIPPortConfigure("LO","${HOST}:5025",0,0,0)
+drvAsynIPPortConfigure("LO","${IP_ADDR}:5025",0,0,0)
 
 # Load record instances
 dbLoadRecords("${TOP}/db/hiden_rga_global.template", "Sys=${P},Dev=${R},MaxMass=200,PORT=LO")
